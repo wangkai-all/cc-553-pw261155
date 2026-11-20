@@ -1,0 +1,183 @@
+{
+  "scenario": {
+    "title": "人民路多班组交叠施工申报",
+    "description": "四个班组在同一道路先后申报施工区间，其中 A 班组审批先故障后仅批准前段；B、C、D 的批准区间互相交叠。D 与 C、C 与 B 均在同一天相接，用于核对半开区间不把同日相接误判为重叠。另有一条跨道路申报，用于核对道路隔离。",
+    "expectations": [
+      "A 班组原申报 2026-03-01~2026-03-21，但审批只覆盖 2026-03-01~2026-03-10，公示不得越权发布后段。",
+      "B 的批准区间与 A 的前段交叠，裁决后 B 应从 2026-03-10 起公示。",
+      "C 与 B 在 2026-03-25 同日相接，不得当作重叠；C 因 B 占用而只保留 2026-03-25~2026-03-28。",
+      "D 与 C 在 2026-03-28 同日相接，D 的 2026-03-28~2026-03-31 应完整保留。",
+      "撤销 B 的审批后，旧公示版本不得被改写；旧链接仍展示当时的片段，但应标注 B 片段已失效。"
+    ]
+  },
+  "teams": [
+    { "id": "T1", "name": "一班组" },
+    { "id": "T2", "name": "二班组" },
+    { "id": "T3", "name": "三班组" },
+    { "id": "T4", "name": "四班组" },
+    { "id": "T5", "name": "五班组" },
+    { "id": "T6", "name": "滨江班组" },
+    { "id": "T7", "name": "照明班组" }
+  ],
+  "roads": [
+    {
+      "id": "R1",
+      "code": "RM-01",
+      "name": "人民路（中山路口—解放路口）"
+    },
+    {
+      "id": "R2",
+      "code": "BJ-07",
+      "name": "滨江大道（码头段）"
+    }
+  ],
+  "reports": [
+    {
+      "id": "RPT-A",
+      "roadId": "R1",
+      "teamId": "T1",
+      "work": "路面铣刨与基层修补",
+      "originalSpan": { "start": "2026-03-01", "end": "2026-03-21" },
+      "submittedAt": "2026-02-18T08:00:00Z",
+      "approvalAttempts": [
+        {
+          "id": "APR-A1",
+          "attempt": 1,
+          "outcome": "error",
+          "decidedAt": "2026-02-19T10:00:00Z",
+          "status": "closed",
+          "message": "审批服务超时，返回可重试错误"
+        },
+        {
+          "id": "APR-A2",
+          "attempt": 2,
+          "outcome": "partial",
+          "approvedSpan": { "start": "2026-03-01", "end": "2026-03-10" },
+          "decidedAt": "2026-02-20T09:00:00Z",
+          "status": "active",
+          "message": "仅批准前段；后段围挡方案待补充"
+        }
+      ]
+    },
+    {
+      "id": "RPT-B",
+      "roadId": "R1",
+      "teamId": "T2",
+      "work": "雨污分流管线开挖",
+      "originalSpan": { "start": "2026-03-08", "end": "2026-03-25" },
+      "submittedAt": "2026-02-18T09:00:00Z",
+      "approvalAttempts": [
+        {
+          "id": "APR-B1",
+          "attempt": 1,
+          "outcome": "approved",
+          "approvedSpan": { "start": "2026-03-08", "end": "2026-03-25" },
+          "decidedAt": "2026-02-21T09:00:00Z",
+          "status": "active",
+          "message": "全段批准"
+        }
+      ]
+    },
+    {
+      "id": "RPT-C",
+      "roadId": "R1",
+      "teamId": "T3",
+      "work": "燃气管道迁改",
+      "originalSpan": { "start": "2026-03-18", "end": "2026-03-28" },
+      "submittedAt": "2026-02-18T10:00:00Z",
+      "approvalAttempts": [
+        {
+          "id": "APR-C1",
+          "attempt": 1,
+          "outcome": "approved",
+          "approvedSpan": { "start": "2026-03-18", "end": "2026-03-28" },
+          "decidedAt": "2026-02-22T09:00:00Z",
+          "status": "active",
+          "message": "全段批准"
+        }
+      ]
+    },
+    {
+      "id": "RPT-D",
+      "roadId": "R1",
+      "teamId": "T4",
+      "work": "人行道铺装",
+      "originalSpan": { "start": "2026-03-28", "end": "2026-03-31" },
+      "submittedAt": "2026-02-18T11:00:00Z",
+      "approvalAttempts": [
+        {
+          "id": "APR-D1",
+          "attempt": 1,
+          "outcome": "approved",
+          "approvedSpan": { "start": "2026-03-28", "end": "2026-03-31" },
+          "decidedAt": "2026-02-23T09:00:00Z",
+          "status": "active",
+          "message": "全段批准"
+        }
+      ]
+    },
+    {
+      "id": "RPT-E",
+      "roadId": "R1",
+      "teamId": "T5",
+      "work": "路灯更换",
+      "originalSpan": { "start": "2026-03-12", "end": "2026-03-14" },
+      "submittedAt": "2026-02-18T12:00:00Z",
+      "approvalAttempts": [
+        {
+          "id": "APR-E1",
+          "attempt": 1,
+          "outcome": "rejected",
+          "decidedAt": "2026-02-23T11:00:00Z",
+          "status": "closed",
+          "message": "未提供交通疏导方案，整段不批准"
+        }
+      ]
+    },
+    {
+      "id": "RPT-F",
+      "roadId": "R1",
+      "teamId": "T7",
+      "work": "隧道照明检修",
+      "originalSpan": { "start": "2026-03-05", "end": "2026-03-09" },
+      "submittedAt": "2026-02-18T14:00:00Z",
+      "approvalAttempts": [
+        {
+          "id": "APR-F1",
+          "attempt": 1,
+          "outcome": "error",
+          "decidedAt": "2026-02-25T09:00:00Z",
+          "status": "closed",
+          "message": "审批网关 502，可重试"
+        },
+        {
+          "id": "APR-F2",
+          "attempt": 2,
+          "outcome": "error",
+          "decidedAt": "2026-02-25T09:05:00Z",
+          "status": "closed",
+          "message": "审批网关 502，可重试"
+        }
+      ]
+    },
+    {
+      "id": "RPT-X",
+      "roadId": "R2",
+      "teamId": "T6",
+      "work": "码头路面标线",
+      "originalSpan": { "start": "2026-03-09", "end": "2026-03-12" },
+      "submittedAt": "2026-02-18T13:00:00Z",
+      "approvalAttempts": [
+        {
+          "id": "APR-X1",
+          "attempt": 1,
+          "outcome": "approved",
+          "approvedSpan": { "start": "2026-03-09", "end": "2026-03-12" },
+          "decidedAt": "2026-02-24T09:00:00Z",
+          "status": "active",
+          "message": "全段批准"
+        }
+      ]
+    }
+  ]
+}

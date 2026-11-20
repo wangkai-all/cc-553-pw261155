@@ -1,0 +1,14 @@
+{
+  "name": "road-construction-interval-console",
+  "version": "1.0.0",
+  "private": true,
+  "description": "本地演示：多班组道路施工区间上报、审批重试/部分批准、区间裁决、版本化公示与旧链接核对",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
